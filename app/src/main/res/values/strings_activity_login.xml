@@ -1,0 +1,20 @@
+<resources>
+    <string name="title_activity_login">Logar</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Logar</string>
+    <string name="action_sign_in_short">Logar</string>
+    <string name="logout">Logout</string>
+    <string name="login_twitter">Login com Twitter</string>
+
+
+    <string name="fazer_cadastro">Fazer Cadastro</string>
+    <string name="nome">Nome</string>
+
+    <string name="error_invalid_email">Esse email é inválido</string>
+    <string name="error_invalid_password">A senha é muito pequena</string>
+    <string name="error_incorrect_password">Senha incorreta</string>
+    <string name="error_field_required">Campo obrigatório</string>
+</resources>

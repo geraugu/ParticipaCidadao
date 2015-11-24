@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Participa Cidadão</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_sobre">Sobre</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="navigation_drawer_open">opened</string>
+    <string name="navigation_drawer_close">closed</string>
+    <string name="title_activity_car">CarActivity</string>
+    <string name="action_transition_activity">Transition</string>
+    <string name="title_activity_transition">TransitionActivity</string>
+    <string name="title_activity_politicos">PoliticosActivity</string>
+    <string name="title_activity_camara">CamaraActivity</string>
+    <string name="title_activity_projetos">ProjetosActivity</string>
+    <string name="title_activity_politico_ficha">PoliticoFichaActivity</string>
+
+    <string name="projeto_apoio">Apoio</string>
+    <string name="projeto_naoapoio">Não Apoio</string>
+    <string name="title_activity_comentario">Comente</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sobre">Sobre</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="sobre">O ParticipaCidadão é um aplicativo em fase experimental destinado a tornar mais fácil e atraente a conexão/interação do cidadão com a Câmara de Vereadores e com temas públicos. Em outras palavras, é também uma plataforma de cidadania e democracia para o cidadão que quer participar mais ativamente do desenvolvimento de sua cidade.\n\n  Essa versão piloto, por enquanto, só disponibiliza os dados da Câmara Municipal de Ouro Branco/MG e da Câmara Legislativa do DF. Entretanto, gradativamente, outros municípios serão incluídos na base de dados. \n\n Mais do que um aplicativo, é uma atitude! Participe! Venha construir conosco as cidades do Brasil de 2030.</string>
+    <string name="credito">Agradecimentos:\nWesley Rocha wesleyweb@gmail.com - criador da marca e logo</string>
+    <string name="menu_search">Procura</string>
+    <string name="title_activity_login2">Login2Activity</string>
+    <string name="title_activity_dialoga">Dialoga, Cidadão!</string>
+    <string name="title_activity_cidade">CidadeActivity</string>
+    <string name="title_activity_ouvidoria">OuvidoriaActivity</string>
+    <string name="nao_ha_opnioes">\"Não há mais opniões, se quiser, insira a sua!\"</string>
+    <string name="precisa_logar_para_votar">É necessário logar para votar.</string>
+    <string name="diga_oq_pensa">Diga o que pensa sobre a pergunta</string>
+    <string name="qual_pergunta">Qual é a pergunta?</string>
+    <string name="faca_login">Faça login ok?</string>
+    <string name="title_proposições_list">Proposição</string>
+    <string name="title_proposições_detail">Proposições Detail</string>
+
+</resources>

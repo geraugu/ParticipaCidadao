@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_vereadores"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Vereadores" />
+        <item
+            android:id="@+id/nav_dialoga"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Dialoga, Cidadão!" />
+        <item
+            android:id="@+id/nav_projetos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Projetos" />
+        <item
+            android:id="@+id/nav_camara"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Câmara" />
+    </group>
+
+    <item android:title="Configuração">
+        <menu>
+            <item
+                android:id="@+id/nav_trocar_cidade"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Trocar Cidade" />
+            <item
+                android:id="@+id/nav_sobre"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Sobre" />
+        </menu>
+    </item>
+
+</menu>
