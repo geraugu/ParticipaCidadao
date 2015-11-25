@@ -1,5 +1,6 @@
 package com.monitorabrasil.participacidadao.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,6 +56,17 @@ public class CamaraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camara);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Dispatcher dispatcher = Dispatcher.get(new Bus());
+        ActionsCreator actionsCreator = ActionsCreator.get(dispatcher);
+        ParseObject cidade = actionsCreator.buscaCidade();
+        if(cidade == null){
+            //abrir a activity para escolher a cidade
+            startActivity(new Intent(getApplicationContext(), CidadeActivity.class));
+
+        }else {
+            toolbar.setSubtitle(cidade.getString("municipio") + "-" + cidade.getString("UF"));
+
+        }
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

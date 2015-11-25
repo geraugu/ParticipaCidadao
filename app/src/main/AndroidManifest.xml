@@ -141,6 +141,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.ProposicoesListActivity" />
         </activity>
+        <activity
+            android:name=".views.VereadorListActivity"
+            android:label="@string/title_vereador_list"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.monitorabrasil.participacidadao.MainActivity" />
+        </activity>
+        <activity
+            android:name=".views.VereadorDetailActivity"
+            android:label="@string/title_vereador_detail"
+            android:parentActivityName=".views.VereadorListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.monitorabrasil.participacidadao.views.VereadorListActivity" />
+        </activity>
     </application>
 
 </manifest>

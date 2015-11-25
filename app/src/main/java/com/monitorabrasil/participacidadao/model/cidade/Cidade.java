@@ -1,6 +1,5 @@
 package com.monitorabrasil.participacidadao.model.cidade;
 
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import java.util.List;
 

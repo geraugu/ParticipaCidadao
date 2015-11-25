@@ -12,7 +12,7 @@
             android:title="Vereadores" />
         <item
             android:id="@+id/nav_dialoga"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@android:drawable/stat_notify_chat"
             android:title="Dialoga, Cidadão!" />
         <item
             android:id="@+id/nav_projetos"
@@ -28,11 +28,11 @@
         <menu>
             <item
                 android:id="@+id/nav_trocar_cidade"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@android:drawable/ic_popup_sync"
                 android:title="Trocar Cidade" />
             <item
                 android:id="@+id/nav_sobre"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@android:drawable/ic_menu_info_details"
                 android:title="Sobre" />
         </menu>
     </item>

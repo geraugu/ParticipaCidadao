@@ -1,0 +1,142 @@
+<android.support.v4.widget.NestedScrollView
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingTop="5dp"
+        android:paddingBottom="25dp">
+
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/foto"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome"
+            android:id="@+id/txtNome"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Partido"
+            android:id="@+id/txtPartido"
+            android:layout_gravity="center_horizontal" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar"
+                android:isIndicator="true"
+                style="@style/Widget.AppCompat.RatingBar"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                style="@style/Base.Widget.AppCompat.ButtonBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Avalie"
+                android:id="@+id/btnAvalie"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefone: "
+            android:id="@+id/textView2"
+            android:textColor="@color/colorPrimarytext"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Telefone"
+            android:autoLink="phone"
+            android:id="@+id/txtTelefone"
+            android:paddingBottom="4dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: "
+            android:id="@+id/textView3"
+            android:textColor="@color/colorPrimarytext"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Email"
+            android:autoLink="email"
+            android:id="@+id/email"
+            android:paddingBottom="4dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facebook: "
+            android:textColor="@color/colorPrimarytext"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Facebook"
+            android:id="@+id/facebook"
+            android:paddingBottom="4dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gastos na campanha: "
+            android:textColor="@color/colorPrimarytext"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Gastos na campanha"
+            android:id="@+id/gastos"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bens Declarados: "
+            android:textColor="@color/colorPrimarytext"
+            android:textSize="12dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Bens Declarados"
+            android:id="@+id/bens" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

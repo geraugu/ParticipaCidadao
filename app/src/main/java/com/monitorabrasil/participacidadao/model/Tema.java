@@ -18,7 +18,7 @@ public class Tema {
             case "ic_cultura":
                 return R.color.cor3;
             case "ic_saude":
-                return R.color.md_red_400;
+                return R.color.tw__composer_red;
             case "ic_seguranca":
                 return R.color.cor9;
             case "ic_educacao":

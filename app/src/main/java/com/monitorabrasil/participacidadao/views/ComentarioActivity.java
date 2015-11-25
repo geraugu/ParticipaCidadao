@@ -3,6 +3,7 @@ package com.monitorabrasil.participacidadao.views;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -112,8 +113,13 @@ public class ComentarioActivity extends AppCompatActivity {
     private void enviarMensagem(final View v) {
         final EditText txtMensagem = (EditText)findViewById(R.id.mensagem);
         String mensagem = txtMensagem.getText().toString();
-        actionsCreator.enviarMensagem(mensagem,tipo,idObjeto);
-        txtMensagem.setText("");
+        if(mensagem.isEmpty()){
+            Snackbar.make(v,getString(R.string.qual_e_mensagem),Snackbar.LENGTH_LONG).show();
+        }else{
+            actionsCreator.enviarMensagem(mensagem,tipo,idObjeto);
+            txtMensagem.setText("");
+        }
+
     }
 
     private void updateUI() {

@@ -11,8 +11,8 @@
     <string name="action_transition_activity">Transition</string>
     <string name="title_activity_transition">TransitionActivity</string>
     <string name="title_activity_politicos">PoliticosActivity</string>
-    <string name="title_activity_camara">CamaraActivity</string>
-    <string name="title_activity_projetos">ProjetosActivity</string>
+    <string name="title_activity_camara">Gastos Câmara</string>
+    <string name="title_activity_projetos">Projetos</string>
     <string name="title_activity_politico_ficha">PoliticoFichaActivity</string>
 
     <string name="projeto_apoio">Apoio</string>
@@ -36,7 +36,10 @@
     <string name="diga_oq_pensa">Diga o que pensa sobre a pergunta</string>
     <string name="qual_pergunta">Qual é a pergunta?</string>
     <string name="faca_login">Faça login ok?</string>
-    <string name="title_proposições_list">Proposição</string>
+    <string name="title_proposições_list">Projetos</string>
     <string name="title_proposições_detail">Proposições Detail</string>
+    <string name="title_vereador_list">Vereadores</string>
+    <string name="title_vereador_detail">Vereador Detail</string>
+    <string name="qual_e_mensagem">Qual é a mensagem????</string>
 
 </resources>

@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:context="com.monitorabrasil.participacidadao.views.ProposiçõesListFragment"
+    tools:context="com.monitorabrasil.participacidadao.views.VereadorListActivity"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:id="@+id/swipe"
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/proposições_list"
+        android:id="@+id/vereador_list"
+        android:name="com.monitorabrasil.participacidadao.views.VereadorListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".views.ProposicoesListActivity"
-        tools:listitem="@layout/proposicoes_list_content" />
+        tools:listitem="@layout/vereador_list_content" />
 </android.support.v4.widget.SwipeRefreshLayout>
+

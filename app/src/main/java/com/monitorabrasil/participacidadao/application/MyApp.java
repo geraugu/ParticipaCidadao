@@ -3,6 +3,7 @@ package com.monitorabrasil.participacidadao.application;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+import com.monitorabrasil.participacidadao.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -41,7 +42,10 @@ public class MyApp extends Application {
         mInstance = this;
 
         //configurando o imageloader
-        DisplayImageOptions mDisplayImageOptions = new DisplayImageOptions.Builder().cacheInMemory(true).build();
+        DisplayImageOptions mDisplayImageOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .showImageOnLoading(R.drawable.tw__ic_tweet_photo_error_light)
+                .build();
         ImageLoaderConfiguration conf = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .defaultDisplayImageOptions(mDisplayImageOptions)
                 .memoryCacheSize(50*1024*1024)

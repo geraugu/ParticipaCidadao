@@ -12,11 +12,13 @@
     tools:context="com.monitorabrasil.participacidadao.views.SobreActivity"
     tools:showIn="@layout/activity_sobre">
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="90dp"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:orientation="vertical">
         <ImageView
@@ -41,5 +43,5 @@
 
 
     </LinearLayout>
-
+</android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

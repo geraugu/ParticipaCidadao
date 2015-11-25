@@ -48,6 +48,7 @@ import com.monitorabrasil.participacidadao.views.DialogaActivity;
 import com.monitorabrasil.participacidadao.views.LoginActivity;
 import com.monitorabrasil.participacidadao.views.ProposicoesListActivity;
 import com.monitorabrasil.participacidadao.views.SobreActivity;
+import com.monitorabrasil.participacidadao.views.VereadorListActivity;
 import com.monitorabrasil.participacidadao.views.adapters.PoliticoAdapter;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
@@ -515,7 +516,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_sobre) {
+            startActivity(new Intent(getApplicationContext(), SobreActivity.class));
             return true;
         }
 
@@ -531,7 +533,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_vereadores) {
-
+            startActivity(new Intent(getApplicationContext(), VereadorListActivity.class));
         } else if (id == R.id.nav_dialoga) {
             startActivity(new Intent(getApplicationContext(), DialogaActivity.class));
         } else if (id == R.id.nav_projetos) {

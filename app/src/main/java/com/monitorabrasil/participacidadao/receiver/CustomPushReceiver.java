@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.monitorabrasil.participacidadao.helper.NotificationUtils;
-import com.monitorabrasil.participacidadao.view.MainActivity;
+import com.monitorabrasil.participacidadao.MainActivity;
 import com.parse.ParsePushBroadcastReceiver;
 
 import org.json.JSONException;
