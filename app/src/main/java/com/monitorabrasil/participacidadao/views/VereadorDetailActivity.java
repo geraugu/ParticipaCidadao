@@ -3,20 +3,18 @@ package com.monitorabrasil.participacidadao.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.monitorabrasil.participacidadao.R;
-import com.monitorabrasil.participacidadao.application.MyApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +95,7 @@ public class VereadorDetailActivity extends AppCompatActivity {
         Adapter adapter = new Adapter(getSupportFragmentManager());
 
         //ficha
-        VereadorDetailFragment ficha = new VereadorDetailFragment();
+        VereadorDetailFragment ficha = VereadorDetailFragment.newInstance(idPolitico);
         ficha.setArguments(getIntent().getExtras());
         adapter.addFragment(ficha, "Ficha");
 
