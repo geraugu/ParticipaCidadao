@@ -119,7 +119,7 @@ public class ProposicoesListActivity extends AppCompatActivity implements Recycl
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
 
         //tableview
-        mRecyclerView = (RecyclerView) findViewById(R.id.proposições_list);
+        mRecyclerView = (RecyclerView) findViewById(R.id.proposicoes_list);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -176,17 +176,21 @@ public class ProposicoesListActivity extends AppCompatActivity implements Recycl
 
     @Override
     public void onClickListener(View view, int position) {
+        ParseObject projeto = projetoStore.getProjetos().get(position);
         if (mTwoPane) {
             Bundle arguments = new Bundle();
-            arguments.putString(ProposicoesDetailFragment.ARG_ITEM_ID,"1");
-            ProposicoesDetailFragment fragment = new ProposicoesDetailFragment();
+            arguments.putString(ProposicoesDetailFragment.ID_PROPOSICAO,projeto.getObjectId());
+            arguments.putString(ProposicoesDetailFragment.NM_PROPOSICAO, projeto.getString("numero"));
+            ProposicoesDetailFragment fragment = ProposicoesDetailFragment
+                    .newInstance(projeto.getObjectId(),projeto.getString("numero"));
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.proposições_detail_container, fragment)
                     .commit();
         } else {
             Intent intent = new Intent(this, ProposicoesDetailActivity.class);
-            intent.putExtra(ProposicoesDetailFragment.ARG_ITEM_ID,"5");
+            intent.putExtra(ProposicoesDetailFragment.ID_PROPOSICAO, projeto.getObjectId());
+            intent.putExtra(ProposicoesDetailFragment.NM_PROPOSICAO, projeto.getString("numero"));
 
             startActivity(intent);
         }

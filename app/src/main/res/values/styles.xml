@@ -46,6 +46,7 @@
 
     <style name="botao">
         <item name="android:textColor">@color/icons</item>
+        <item name="android:background">@color/colorAccent</item>
     </style>
 
     <style name="TextAppearance.MaterialSheetFab.Sheet.Item" parent="">

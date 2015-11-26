@@ -34,14 +34,15 @@
 
             <!--FOTO-->
             <ImageButton
-                android:layout_width="50dp"
+                android:layout_width="70dp"
                 android:paddingTop="5dp"
-                android:layout_height="50dp"
+                android:layout_height="70dp"
                 android:visibility="visible"
                 android:layout_gravity="center"
                 android:id="@+id/btnFoto"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/transparent" />
+                android:src="@drawable/tw__ic_tweet_photo_error_light"
+                android:adjustViewBounds="false" />
 
             <!--NOME - SOMENTE PARA CADASTRO NOVO OU QUANDO LOGADO-->
             <android.support.design.widget.TextInputLayout

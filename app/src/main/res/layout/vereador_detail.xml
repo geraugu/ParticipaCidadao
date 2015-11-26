@@ -11,12 +11,12 @@
         android:paddingBottom="25dp">
 
 
-        <ImageView
+     <!--   <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:id="@+id/foto"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp" /> -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_gravity="center_horizontal" />
 
             <Button
-                style="@style/Base.Widget.AppCompat.ButtonBar"
+                style="@style/botao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Avalie"

@@ -172,7 +172,7 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
-
+        mSwitchTwitter.setVisibility(View.INVISIBLE);
 
 //        mSwitchTwitter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override

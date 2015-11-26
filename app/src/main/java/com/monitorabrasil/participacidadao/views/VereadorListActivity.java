@@ -2,6 +2,12 @@ package com.monitorabrasil.participacidadao.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +26,13 @@ import com.monitorabrasil.participacidadao.dispatcher.Dispatcher;
 import com.monitorabrasil.participacidadao.stores.PoliticoStore;
 import com.monitorabrasil.participacidadao.views.adapters.PoliticoAdapter;
 import com.monitorabrasil.participacidadao.views.interfaces.RecyclerViewOnClickListenerHack;
+import com.monitorabrasil.participacidadao.views.interfaces.VereadorProjetosFragment;
 import com.parse.ParseObject;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.v4.app.NavUtils.navigateUpFromSameTask;
 
@@ -43,6 +53,11 @@ public class VereadorListActivity extends AppCompatActivity implements RecyclerV
     private ActionsCreator actionsCreator;
     private PoliticoStore politicoStore;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    private FloatingActionButton fab;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -69,21 +84,47 @@ public class VereadorListActivity extends AppCompatActivity implements RecyclerV
         }
 
 
+
+
+        initDependencies();
+        setupView();
         if (findViewById(R.id.vereador_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
-        }
 
-        initDependencies();
-        setupView();
+        }
         mSwipeRefreshLayout.setRefreshing(true);
         actionsCreator.getAllPoliticos("nome");
 
         ParseObject cidade = actionsCreator.buscaCidade();
         toolbar.setSubtitle(cidade.getString("municipio") + "-" + cidade.getString("UF"));
+    }
+
+    private void setupViewPager(ViewPager viewPager, String idPolitico) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+
+        //ficha
+        VereadorDetailFragment ficha = VereadorDetailFragment.newInstance(idPolitico);
+        ficha.setArguments(getIntent().getExtras());
+        adapter.addFragment(ficha, "Ficha");
+
+        //gastos - grafico
+//        VereadorDetailFragment gastos = new VereadorDetailFragment();
+//        gastos.setArguments(getIntent().getExtras());
+//        adapter.addFragment(gastos, "Gastos");
+
+        //projetos
+        VereadorProjetosFragment listaProjetosFragment = VereadorProjetosFragment.newInstance(idPolitico);
+        adapter.addFragment(listaProjetosFragment, "Projetos");
+
+        viewPager.setAdapter(adapter);
+        viewPager.getAdapter().notifyDataSetChanged();
+
+
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void initDependencies() {
@@ -110,6 +151,13 @@ public class VereadorListActivity extends AppCompatActivity implements RecyclerV
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setRecyclerViewOnClickListenerHack(this);
 
+        if(mTwoPane){
+            viewPager = (ViewPager) findViewById(R.id.viewpager);
+            tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        }
+
     }
 
     private void updateUI() {
@@ -135,18 +183,36 @@ public class VereadorListActivity extends AppCompatActivity implements RecyclerV
 
     @Override
     public void onClickListener(View view, int position) {
+        final ParseObject politico = politicoStore.getPoliticos().get(position);
         if (mTwoPane) {
-            Bundle arguments = new Bundle();
-            arguments.putString(ProposicoesDetailFragment.ARG_ITEM_ID,"1");
-            VereadorDetailFragment fragment = new VereadorDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.proposições_detail_container, fragment)
-                    .commit();
+//            Bundle arguments = new Bundle();
+//            arguments.putString(VereadorDetailFragment.ID_POLITICO,politico.getObjectId());
+//            arguments.putString(VereadorDetailFragment.ID_IMAGEM,politico.getString("cpf"));
+//            arguments.putString(VereadorDetailFragment.NM_POLITICO,politico.getString("nome"));
+
+            setupViewPager(viewPager, politico.getObjectId());
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent mIntent = new Intent(getApplicationContext(), ComentarioActivity.class);
+                    mIntent.putExtra(VereadorDetailFragment.ID_POLITICO, politico.getObjectId());
+                    mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(mIntent);
+                }
+            });
+
+
+//            VereadorDetailFragment fragment = new VereadorDetailFragment();
+//            fragment.setArguments(arguments);
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.proposições_detail_container, fragment)
+//                    .commit();
         } else {
             Intent intent = new Intent(this, VereadorDetailActivity.class);
-            intent.putExtra(ProposicoesDetailFragment.ARG_ITEM_ID,"5");
-
+            intent.putExtra(VereadorDetailFragment.ID_POLITICO,politico.getObjectId());
+            intent.putExtra(VereadorDetailFragment.ID_IMAGEM, politico.getString("cpf"));
+            intent.putExtra(VereadorDetailFragment.NM_POLITICO, politico.getString("nome"));
             startActivity(intent);
         }
     }
@@ -180,6 +246,37 @@ public class VereadorListActivity extends AppCompatActivity implements RecyclerV
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    static class Adapter extends FragmentStatePagerAdapter {
+        private final List<Fragment> mFragments = new ArrayList<>();
+        private final List<String> mFragmentTitles = new ArrayList<>();
+
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragments.add(fragment);
+            mFragmentTitles.add(title);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            return mFragments.get(position);
+        }
+
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitles.get(position);
+        }
     }
 
 }

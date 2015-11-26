@@ -14,7 +14,6 @@
         android:name="com.monitorabrasil.participacidadao.views.VereadorListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/vereador_list_content" />
+        app:layoutManager="LinearLayoutManager"/>
 </android.support.v4.widget.SwipeRefreshLayout>
 

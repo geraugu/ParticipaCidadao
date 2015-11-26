@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.monitorabrasil.participacidadao.R;
 import com.monitorabrasil.participacidadao.actions.ActionsCreator;
 import com.monitorabrasil.participacidadao.application.MyApp;
@@ -149,7 +148,6 @@ public class ProjetoAdapter extends RecyclerView.Adapter<ProjetoAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent mIntent =new Intent(MyApp.getInstance().getApplicationContext(), ComentarioActivity.class);
-                Gson gson = new Gson();
                 mIntent.putExtra("projeto",viewHolder.projeto.getObjectId());
 
                 mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

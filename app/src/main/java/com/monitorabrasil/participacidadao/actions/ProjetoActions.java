@@ -13,4 +13,5 @@ public interface ProjetoActions {
     String KEY_ID = "key-id";
 
 
+    String GET_PROJETO = "get_projeto";
 }

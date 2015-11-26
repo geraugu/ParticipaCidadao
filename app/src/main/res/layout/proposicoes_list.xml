@@ -9,10 +9,9 @@
     android:id="@+id/swipe"
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/proposições_list"
+        android:id="@+id/proposicoes_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".views.ProposicoesListActivity"
-        tools:listitem="@layout/proposicoes_list_content" />
+        tools:context=".views.ProposicoesListActivity" />
 </android.support.v4.widget.SwipeRefreshLayout>

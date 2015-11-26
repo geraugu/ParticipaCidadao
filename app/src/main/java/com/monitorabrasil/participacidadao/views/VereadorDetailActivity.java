@@ -13,8 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.monitorabrasil.participacidadao.R;
+import com.monitorabrasil.participacidadao.application.MyApp;
+import com.monitorabrasil.participacidadao.views.interfaces.VereadorProjetosFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,7 @@ import java.util.List;
 public class VereadorDetailActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private String idPolitico;
+    private ImageView foto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +44,8 @@ public class VereadorDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(VereadorDetailActivity.this, ComentarioActivity.class);
-                mIntent.putExtra("politico", idPolitico);
-
+                mIntent.putExtra(VereadorDetailFragment.ID_POLITICO, idPolitico);
                 mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                 startActivity(mIntent);
     }
 });
@@ -79,10 +81,12 @@ public class VereadorDetailActivity extends AppCompatActivity {
 
 
         Bundle bundle = getIntent().getExtras();
-        idPolitico = bundle.getString("idPolitico");
-        setTitle(bundle.getString("nome"));
-
-
+        idPolitico = bundle.getString(VereadorDetailFragment.ID_POLITICO);
+        assert actionBar != null;
+        actionBar.setTitle(bundle.getString(VereadorDetailFragment.NM_POLITICO));
+        foto = (ImageView)findViewById(R.id.foto);
+        MyApp.getInstance().getmImagemLoader().displayImage(MyApp.URL_FOTO +
+                bundle.getString(VereadorDetailFragment.ID_IMAGEM)+ ".jpg", foto);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
@@ -100,12 +104,12 @@ public class VereadorDetailActivity extends AppCompatActivity {
         adapter.addFragment(ficha, "Ficha");
 
         //gastos - grafico
-        VereadorDetailFragment gastos = new VereadorDetailFragment();
-        gastos.setArguments(getIntent().getExtras());
-        adapter.addFragment(gastos, "Gastos");
+//        VereadorDetailFragment gastos = new VereadorDetailFragment();
+//        gastos.setArguments(getIntent().getExtras());
+//        adapter.addFragment(gastos, "Gastos");
 
         //projetos
-        VereadorDetailFragment listaProjetosFragment = new VereadorDetailFragment();
+        VereadorProjetosFragment listaProjetosFragment = VereadorProjetosFragment.newInstance(idPolitico);
         adapter.addFragment(listaProjetosFragment, "Projetos");
 
         viewPager.setAdapter(adapter);

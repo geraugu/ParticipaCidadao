@@ -19,6 +19,7 @@ public class ProjetoStore extends Store{
     private String evento;
     private List<ParseObject> projetos;
     private List<ParseObject> tiposProjeto;
+    private ParseObject projeto;
 
     public List<ParseObject> getTiposProjeto() {
         return tiposProjeto;
@@ -62,6 +63,10 @@ public class ProjetoStore extends Store{
                 projetos = ((List<ParseObject>) action.getData().get(ProjetoActions.KEY_TEXT));
                 emitStoreChange();
                 break;
+            case ProjetoActions.GET_PROJETO:
+                projeto = ((ParseObject) action.getData().get(ProjetoActions.KEY_TEXT));
+                emitStoreChange();
+                break;
 
         }
     }
@@ -78,7 +83,9 @@ public class ProjetoStore extends Store{
         projetos.clear();
     }
 
-
+    public ParseObject getProjeto() {
+        return projeto;
+    }
 
 
     public class ProjetoStoreChangeEvent implements StoreChangeEvent {

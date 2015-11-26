@@ -54,7 +54,7 @@ public class ComentarioActivity extends AppCompatActivity {
             tipo="Comentario";
 
         }else{
-            idObjeto = getIntent().getStringExtra("politico");
+            idObjeto = getIntent().getStringExtra(VereadorDetailFragment.ID_POLITICO);
             tipo="ComentarioPolitico";
         }
         actionsCreator.getAllComentarios(tipo,idObjeto);

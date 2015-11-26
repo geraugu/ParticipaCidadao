@@ -1,9 +1,12 @@
 package com.monitorabrasil.participacidadao;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -38,6 +41,7 @@ import com.monitorabrasil.participacidadao.dispatcher.Dispatcher;
 import com.monitorabrasil.participacidadao.model.Grafico;
 import com.monitorabrasil.participacidadao.model.Pergunta;
 import com.monitorabrasil.participacidadao.model.Tema;
+import com.monitorabrasil.participacidadao.model.Usuario;
 import com.monitorabrasil.participacidadao.model.util.MyValueFormatter;
 import com.monitorabrasil.participacidadao.stores.CamaraStore;
 import com.monitorabrasil.participacidadao.stores.DialogaStore;
@@ -48,11 +52,15 @@ import com.monitorabrasil.participacidadao.views.DialogaActivity;
 import com.monitorabrasil.participacidadao.views.LoginActivity;
 import com.monitorabrasil.participacidadao.views.ProposicoesListActivity;
 import com.monitorabrasil.participacidadao.views.SobreActivity;
+import com.monitorabrasil.participacidadao.views.VereadorDetailFragment;
 import com.monitorabrasil.participacidadao.views.VereadorListActivity;
 import com.monitorabrasil.participacidadao.views.adapters.PoliticoAdapter;
+import com.monitorabrasil.participacidadao.views.interfaces.RecyclerViewOnClickListenerHack;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.squareup.otto.Bus;
@@ -64,7 +72,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener  , RecyclerViewOnClickListenerHack {
 
     private final int REQUEST_INVITE = 214;
     private RecyclerView mRecyclerView;
@@ -87,13 +95,14 @@ public class MainActivity extends AppCompatActivity
     public BarChart mChart;
 
     private View headerView;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +120,7 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -124,7 +133,6 @@ public class MainActivity extends AppCompatActivity
 
         initDependencies();
         verificaPush();
-        verificaCidade(toolbar);
         
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,28 +142,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //setup headerview
-        if(ParseUser.getCurrentUser()!=null)
-            setupHeader();
+
         
         setupView();
     }
 
-    private void setupHeader() {
-        TextView mNome = (TextView)headerView.findViewById(R.id.txtNome);
-        ParseUser user = ParseUser.getCurrentUser();
-        mNome.setText(user.getUsername());
-        TextView mEmail = (TextView)headerView.findViewById(R.id.txtEmail);
-        mEmail.setText(user.getEmail());
 
-        if(user.getString("image_url") != null){
-            ImageView img = (ImageView)headerView.findViewById(R.id.imgPerfil);
-            DisplayImageOptions mDisplayImageOptions = new DisplayImageOptions.Builder().displayer(new RoundedBitmapDisplayer(100)).cacheInMemory(true).build();
-            String url = "https://twitter.com/"+user.getUsername()+"/profile_image?size=normal";
-            MyApp.getInstance().getmImagemLoader().displayImage(user.getString("image_url"), img,mDisplayImageOptions);
-        }
-
-    }
 
     private void verificaCidade(Toolbar mToolbar) {
         mToolbar.setTitle(getString(R.string.app_name));
@@ -207,7 +199,7 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(llm);
         mAdapter = new PoliticoAdapter(actionsCreator);
         mRecyclerView.setAdapter(mAdapter);
-//        mAdapter.setRecyclerViewOnClickListenerHack(this);
+        mAdapter.setRecyclerViewOnClickListenerHack(this);
 
         //buscar o grafico de gastos
         mChart = (BarChart)findViewById(R.id.chart1);
@@ -468,6 +460,8 @@ public class MainActivity extends AppCompatActivity
         dispatcher.register(politicoStore);
         dispatcher.register(camaraStore);
 
+        atualizaTopo();
+
 
 
         //busca vereadores
@@ -480,6 +474,58 @@ public class MainActivity extends AppCompatActivity
 
         //busca gastos
         actionsCreator.getGastos();
+    }
+
+    private void atualizaTopo() {
+        mToolbar.setTitle(getString(R.string.app_name));
+        ParseObject cidade = actionsCreator.buscaCidade();
+        if(cidade == null){
+            //abrir a activity para escolher a cidade
+            startActivity(new Intent(getApplicationContext(), CidadeActivity.class));
+
+        }else {
+            mToolbar.setSubtitle(cidade.getString("municipio") + "-" + cidade.getString("UF"));
+
+        }
+        //setup headerview
+        if(ParseUser.getCurrentUser()!=null)
+            setupHeader();
+
+
+    }
+
+    private void setupHeader() {
+        TextView mNome = (TextView)headerView.findViewById(R.id.txtNome);
+        ParseUser user = ParseUser.getCurrentUser();
+        mNome.setText(user.getUsername());
+        TextView mEmail = (TextView)headerView.findViewById(R.id.txtEmail);
+        mEmail.setText(user.getEmail());
+
+        if(user.getString("image_url") != null){
+            ImageView img = (ImageView)headerView.findViewById(R.id.imgPerfil);
+            DisplayImageOptions mDisplayImageOptions = new DisplayImageOptions.Builder().displayer(new RoundedBitmapDisplayer(100)).cacheInMemory(true).build();
+            String url = "https://twitter.com/"+user.getUsername()+"/profile_image?size=normal";
+            MyApp.getInstance().getmImagemLoader().displayImage(user.getString("image_url"), img,mDisplayImageOptions);
+        }
+
+        ParseFile foto = (ParseFile)user.get("foto");
+        if(foto!=null){
+            foto.getDataInBackground(new GetDataCallback() {
+                public void done(byte[] data, ParseException e) {
+                    if (e == null) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        bitmap = Bitmap.createScaledBitmap(bitmap, 120, 120, true);
+                        ImageView img = (ImageView) headerView.findViewById(R.id.imgPerfil);
+                        img.setImageBitmap(bitmap);
+
+                    } else {
+                        // something went wrong
+                    }
+                }
+            });
+        }
+
+        headerView.setBackground(ContextCompat.getDrawable(this, Usuario.buscaImagemTopo()));
     }
 
     @Override
@@ -550,5 +596,15 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClickListener(View view, int position) {
+        ParseObject politico = politicoStore.getPoliticos().get(position);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(VereadorDetailFragment.ID_POLITICO,politico.getObjectId());
+        intent.putExtra(VereadorDetailFragment.ID_IMAGEM, politico.getString("cpf"));
+        intent.putExtra(VereadorDetailFragment.NM_POLITICO, politico.getString("nome"));
+        startActivity(intent);
     }
 }

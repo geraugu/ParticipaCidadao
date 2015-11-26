@@ -988,4 +988,16 @@ public class ActionsCreator {
     }
 
 
+    public void getProjeto(String idProposicao) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Projeto");
+        query.getInBackground(idProposicao, new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+                dispatcher.dispatch(
+                        ProjetoActions.GET_PROJETO,
+                        ProjetoActions.KEY_TEXT, parseObject
+                );
+            }
+        });
+    }
 }

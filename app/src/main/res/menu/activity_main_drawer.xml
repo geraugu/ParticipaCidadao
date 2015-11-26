@@ -4,23 +4,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/ic_nav_home"
             android:title="Home" />
         <item
             android:id="@+id/nav_vereadores"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/ic_nav_vereadores"
             android:title="Vereadores" />
         <item
             android:id="@+id/nav_dialoga"
-            android:icon="@android:drawable/stat_notify_chat"
+            android:icon="@mipmap/ic_nav_dialoga"
             android:title="Dialoga, Cidadão!" />
         <item
             android:id="@+id/nav_projetos"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/ic_nav_projetos"
             android:title="Projetos" />
         <item
             android:id="@+id/nav_camara"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@mipmap/ic_nav_camara"
             android:title="Câmara" />
     </group>
 
@@ -32,7 +32,7 @@
                 android:title="Trocar Cidade" />
             <item
                 android:id="@+id/nav_sobre"
-                android:icon="@android:drawable/ic_menu_info_details"
+                android:icon="@mipmap/ic_nav_about"
                 android:title="Sobre" />
         </menu>
     </item>

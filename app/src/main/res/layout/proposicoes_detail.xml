@@ -1,9 +1,85 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/proposições_detail"
     style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".views.ProposicoesDetailFragment" />
+    android:orientation="vertical"
+    tools:context=".views.ProposicoesDetailFragment" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtTipoProjeto"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <View style="@style/Divider"></View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEmenta"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp" />
+    <View style="@style/Divider"></View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Autor: "
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtAutor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Localização: "
+        android:id="@+id/txtLocal"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Situação:"
+        android:id="@+id/txtSituacao"
+        android:visibility="gone" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Norma Gerada:"
+        android:id="@+id/txtNormaGerada"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Publicações:"
+        android:id="@+id/txtPublicacoes"
+        android:visibility="gone" />
+    <View style="@style/Divider"></View>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="http://legislacao.cl.df.gov.br/Legislacao/consultaProposicao-1!770!2015!visualizar.action"
+        android:id="@+id/txtLink"
+        android:textSize="10sp"
+        android:textColorLink="@color/coloLink"
+        android:linksClickable="false"
+        android:autoLink="web"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:visibility="gone" />
+</LinearLayout>

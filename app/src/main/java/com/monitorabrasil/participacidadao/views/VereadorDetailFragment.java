@@ -21,7 +21,6 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.monitorabrasil.participacidadao.R;
 import com.monitorabrasil.participacidadao.actions.ActionsCreator;
-import com.monitorabrasil.participacidadao.application.MyApp;
 import com.monitorabrasil.participacidadao.dispatcher.Dispatcher;
 import com.monitorabrasil.participacidadao.stores.PoliticoStore;
 import com.monitorabrasil.participacidadao.views.dialogs.DialogAvaliacao;
@@ -39,7 +38,9 @@ import com.squareup.otto.Subscribe;
  */
 public class VereadorDetailFragment extends Fragment {
 
-    private static final String ID_POLITICO = "idPolitico";
+    public static final String ID_POLITICO = "idPolitico";
+    public static final String NM_POLITICO = "nm_politico";
+    public static final String ID_IMAGEM = "id_imagem";
     private ParseObject politico;
     private View mView;
     private RatingBar mRatingBar;
@@ -117,7 +118,7 @@ public class VereadorDetailFragment extends Fragment {
         Bundle bundle = getArguments();
 //
         btnAvaliar = (Button) view.findViewById(R.id.btnAvalie);
-        foto = (ImageView)view.findViewById(R.id.foto);
+       // foto = (ImageView)view.findViewById(R.id.foto);
         txtNome = (TextView) view.findViewById(R.id.txtNome);
         telefone = (TextView) view.findViewById(R.id.txtTelefone);
         txtPartido = (TextView) view.findViewById(R.id.txtPartido);
@@ -179,7 +180,7 @@ public class VereadorDetailFragment extends Fragment {
 
         //foto
 
-        MyApp.getInstance().getmImagemLoader().displayImage(MyApp.URL_FOTO + politico.get("cpf") + ".jpg", foto);
+        //MyApp.getInstance().getmImagemLoader().displayImage(MyApp.URL_FOTO + politico.get("cpf") + ".jpg", foto);
 
         //nome
 
