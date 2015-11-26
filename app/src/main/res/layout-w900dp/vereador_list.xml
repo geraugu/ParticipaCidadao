@@ -35,6 +35,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:id="@+id/vereador_detail_container"
         android:layout_height="match_parent">
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"

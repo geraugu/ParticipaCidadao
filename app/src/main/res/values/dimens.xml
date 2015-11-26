@@ -62,4 +62,5 @@
     <dimen name="note_title_textsize">24sp</dimen>
     <dimen name="item_width">200dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="app_bar_height2">230dp</dimen>
 </resources>

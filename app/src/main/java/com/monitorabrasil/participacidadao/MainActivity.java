@@ -52,6 +52,7 @@ import com.monitorabrasil.participacidadao.views.DialogaActivity;
 import com.monitorabrasil.participacidadao.views.LoginActivity;
 import com.monitorabrasil.participacidadao.views.ProposicoesListActivity;
 import com.monitorabrasil.participacidadao.views.SobreActivity;
+import com.monitorabrasil.participacidadao.views.VereadorDetailActivity;
 import com.monitorabrasil.participacidadao.views.VereadorDetailFragment;
 import com.monitorabrasil.participacidadao.views.VereadorListActivity;
 import com.monitorabrasil.participacidadao.views.adapters.PoliticoAdapter;
@@ -601,7 +602,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClickListener(View view, int position) {
         ParseObject politico = politicoStore.getPoliticos().get(position);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, VereadorDetailActivity.class);
         intent.putExtra(VereadorDetailFragment.ID_POLITICO,politico.getObjectId());
         intent.putExtra(VereadorDetailFragment.ID_IMAGEM, politico.getString("cpf"));
         intent.putExtra(VereadorDetailFragment.NM_POLITICO, politico.getString("nome"));

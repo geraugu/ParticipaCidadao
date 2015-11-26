@@ -637,7 +637,8 @@ public class ActionsCreator {
 
         ParseQuery<ParseObject> query = ParseQuery.or(queries);
         query.whereEqualTo("cidade",buscaCidade());
-        query.addDescendingOrder("createdAt");
+        query.addDescendingOrder("ano");
+        query.addDescendingOrder("numero");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -661,7 +662,8 @@ public class ActionsCreator {
 
     public void getAllProjetos(String idPolitico, String tipoProjeto, int previousTotal) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Projeto");
-        query.addDescendingOrder("createdAt");
+        query.addDescendingOrder("ano");
+        query.addDescendingOrder("numero");
         query.setLimit(15);
         query.setSkip(previousTotal);
 
@@ -989,15 +991,20 @@ public class ActionsCreator {
 
 
     public void getProjeto(String idProposicao) {
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Projeto");
         query.getInBackground(idProposicao, new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject parseObject, ParseException e) {
-                dispatcher.dispatch(
-                        ProjetoActions.GET_PROJETO,
-                        ProjetoActions.KEY_TEXT, parseObject
-                );
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    dispatcher.dispatch(
+                            ProjetoActions.GET_PROJETO,
+                            ProjetoActions.KEY_TEXT, object
+                    );
+                } else {
+                    // something went wrong
+                }
             }
         });
+
     }
 }

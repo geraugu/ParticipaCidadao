@@ -59,11 +59,10 @@ public class ProposicoesDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            Bundle arguments = new Bundle();
             ProposicoesDetailFragment fragment = ProposicoesDetailFragment
                     .newInstance(getIntent().getStringExtra(ProposicoesDetailFragment.ID_PROPOSICAO),
                             getIntent().getStringExtra(ProposicoesDetailFragment.NM_PROPOSICAO));
-            fragment.setArguments(arguments);
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.proposições_detail_container, fragment)
                     .commit();

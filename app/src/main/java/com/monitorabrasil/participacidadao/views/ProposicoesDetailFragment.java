@@ -120,24 +120,24 @@ public class ProposicoesDetailFragment extends Fragment {
         txtTipoProjeto.setText(projeto.getString("tipo"));
         txtEmenta.setText(projeto.getString("descricao"));
         ParseObject autor = projeto.getParseObject("politico");
-        txtAutor.setText(autor.getString("nome"));
-        if(!projeto.getString("localizacao").isEmpty()){
+        txtAutor.setText("Autor: "+autor.getString("nome"));
+        if(projeto.getString("localizacao") != null){
             txtLocal.setText("Localização:"+ projeto.getString("localizacao"));
             txtLocal.setVisibility(View.VISIBLE);
         }
-        if(!projeto.getString("situacao").isEmpty()){
+        if(projeto.getString("situacao") != null){
             txtSituacao.setText("Situação:"+ projeto.getString("situacao"));
             txtSituacao.setVisibility(View.VISIBLE);
         }
-        if(!projeto.getString("norma_gerada").isEmpty()){
+        if(projeto.getString("norma_gerada") != null){
             txtNormaGerada.setText("Norma gerada:"+ projeto.getString("norma_gerada"));
             txtNormaGerada.setVisibility(View.VISIBLE);
         }
-        if(!projeto.getString("publicacoes").isEmpty()){
+        if(projeto.getString("publicacoes") != null){
             txtPublicacoes.setText("Publicações:"+ projeto.getString("publicacoes"));
             txtPublicacoes.setVisibility(View.VISIBLE);
         }
-        if(!projeto.getString("link").isEmpty()){
+        if(projeto.getString("link") != null){
             txtLink.setText("http://legislacao.cl.df.gov.br"
                     +projeto.getString("link"));
             txtLink.setVisibility(View.VISIBLE);
@@ -152,7 +152,7 @@ public class ProposicoesDetailFragment extends Fragment {
      * @param event
      */
     @Subscribe
-    public void onTodoStoreChange(PoliticoStore.PoliticoStoreChangeEvent event) {
+    public void onTodoStoreChange(ProjetoStore.ProjetoStoreChangeEvent event) {
         updateUI();
     }
 
