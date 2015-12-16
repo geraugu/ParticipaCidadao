@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity
     private View headerView;
     private Toolbar mToolbar;
 
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         headerView = getLayoutInflater().inflate(R.layout.nav_header_main, navigationView, false);
@@ -492,13 +494,24 @@ public class MainActivity extends AppCompatActivity
         if(ParseUser.getCurrentUser()!=null)
             setupHeader();
 
+        //atualizaMenu
+        MenuItem item = navigationView.getMenu().findItem(R.id.nav_vereadores);
+        if(cidade != null){
+            if(cidade.getString("municipio").equals("Brasília")){
+                item.setTitle("Dep. Distritais");
+            }else{
+                item.setTitle("Vereadores");
+            }
+        }
+
+
 
     }
 
     private void setupHeader() {
         TextView mNome = (TextView)headerView.findViewById(R.id.txtNome);
         ParseUser user = ParseUser.getCurrentUser();
-        mNome.setText(user.getUsername());
+        mNome.setText(user.getString("nome"));
         TextView mEmail = (TextView)headerView.findViewById(R.id.txtEmail);
         mEmail.setText(user.getEmail());
 

@@ -17,7 +17,6 @@ import android.widget.ImageView;
 
 import com.monitorabrasil.participacidadao.R;
 import com.monitorabrasil.participacidadao.application.MyApp;
-import com.monitorabrasil.participacidadao.views.interfaces.VereadorProjetosFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,9 +103,8 @@ public class VereadorDetailActivity extends AppCompatActivity {
         adapter.addFragment(ficha, "Ficha");
 
         //gastos - grafico
-//        VereadorDetailFragment gastos = new VereadorDetailFragment();
-//        gastos.setArguments(getIntent().getExtras());
-//        adapter.addFragment(gastos, "Gastos");
+        VereadorCotaFragment gastos = VereadorCotaFragment.newInstance(idPolitico);
+        adapter.addFragment(gastos, "Gastos");
 
         //projetos
         VereadorProjetosFragment listaProjetosFragment = VereadorProjetosFragment.newInstance(idPolitico);

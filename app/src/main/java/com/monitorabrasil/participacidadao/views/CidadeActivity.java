@@ -65,6 +65,7 @@ public class CidadeActivity extends AppCompatActivity implements RecyclerViewOnC
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setRecyclerViewOnClickListenerHack(this);
 
+
     }
 
     private void updateUI() {

@@ -29,29 +29,32 @@
 <View
     style="@style/Divider"
     android:id="@+id/divider"
-    android:layout_above="@+id/mensagem"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnEnviar"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@android:drawable/ic_menu_send" />
-
+    android:layout_above="@+id/ll"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:id="@+id/ll"
+    android:background="#cac6c6">
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Envie seu comentário"
         android:id="@+id/mensagem"
         android:textColorHint="@color/grey"
         android:textColorLink="@color/grey"
         android:textColor="@color/colorPrimarytext"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btnEnviar"
-        android:layout_toStartOf="@+id/btnEnviar" />
+        android:layout_weight="0.8" />
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnEnviar"
+        android:background="@android:drawable/ic_menu_send" />
+
+
+</LinearLayout>
 </RelativeLayout>

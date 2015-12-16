@@ -26,7 +26,6 @@ import com.monitorabrasil.participacidadao.dispatcher.Dispatcher;
 import com.monitorabrasil.participacidadao.stores.PoliticoStore;
 import com.monitorabrasil.participacidadao.views.adapters.PoliticoAdapter;
 import com.monitorabrasil.participacidadao.views.interfaces.RecyclerViewOnClickListenerHack;
-import com.monitorabrasil.participacidadao.views.interfaces.VereadorProjetosFragment;
 import com.parse.ParseObject;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -73,7 +72,8 @@ public class VereadorListActivity extends AppCompatActivity implements RecyclerV
                 .putContentType("Activity"));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+
+
 
 
 
@@ -101,6 +101,15 @@ public class VereadorListActivity extends AppCompatActivity implements RecyclerV
 
         ParseObject cidade = actionsCreator.buscaCidade();
         toolbar.setSubtitle(cidade.getString("municipio") + "-" + cidade.getString("UF"));
+
+
+
+        //atualizaMenu
+        if(cidade.getString("municipio").equals("Brasília")){
+            setTitle("Dep. Distritais");
+        }else{
+            setTitle("Vereadores");
+        }
     }
 
     private void setupViewPager(ViewPager viewPager, String idPolitico) {

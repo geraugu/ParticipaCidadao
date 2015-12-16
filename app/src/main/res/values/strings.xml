@@ -25,7 +25,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="sobre">O ParticipaCidadão é um aplicativo em fase experimental destinado a tornar mais fácil e atraente a conexão/interação do cidadão com a Câmara de Vereadores e com temas públicos. Em outras palavras, é também uma plataforma de cidadania e democracia para o cidadão que quer participar mais ativamente do desenvolvimento de sua cidade.\n\n  Essa versão piloto, por enquanto, só disponibiliza os dados da Câmara Municipal de Ouro Branco/MG e da Câmara Legislativa do DF. Entretanto, gradativamente, outros municípios serão incluídos na base de dados. \n\n Mais do que um aplicativo, é uma atitude! Participe! Venha construir conosco as cidades do Brasil de 2030.</string>
-    <string name="credito">Agradecimentos:\nWesley Rocha wesleyweb@gmail.com - criador da marca e logo</string>
+    <string name="credito">Agradecimentos:\nWesley Rocha wesleyweb@gmail.com - criador da marca e logo\nDúvidas, sugestões, mandem email para geraldo.morais@gmail.com\n
+        Se gostou, avalie no Play Store https://play.google.com/store/apps/details?id=com.monitorabrasil.participacidadao</string>
     <string name="menu_search">Procura</string>
     <string name="title_activity_login2">Login2Activity</string>
     <string name="title_activity_dialoga">Dialoga, Cidadão!</string>
@@ -41,5 +42,6 @@
     <string name="title_vereador_list">Vereadores</string>
     <string name="title_vereador_detail">Vereador Detail</string>
     <string name="qual_e_mensagem">Qual é a mensagem????</string>
+    <string name="cadastro_atualizado">Cadastro atualizado! ;)</string>
 
 </resources>

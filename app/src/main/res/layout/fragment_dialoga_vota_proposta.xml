@@ -130,7 +130,7 @@
             android:id="@+id/llBotoes">
 
             <Button
-                style="?android:attr/buttonStyleSmall"
+                style="@style/botao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Resultado"
@@ -139,23 +139,25 @@
                 android:layout_weight="1" />
 
             <Button
-                style="?android:attr/buttonStyleSmall"
+                style="@style/botao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Dê sua opnião"
                 android:id="@+id/btnInserirOpniao"
                 android:theme="@style/botao"
                 android:layout_weight="1"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_marginLeft="2dp" />
 
             <Button
-                style="?android:attr/buttonStyleSmall"
+                style="@style/botao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Próxima"
                 android:id="@+id/btnProxima"
                 android:theme="@style/botao"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp" />
         </LinearLayout>
     </RelativeLayout>
 

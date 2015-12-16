@@ -1,4 +1,4 @@
-package com.monitorabrasil.participacidadao.views.interfaces;
+package com.monitorabrasil.participacidadao.views;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,11 +16,8 @@ import com.monitorabrasil.participacidadao.R;
 import com.monitorabrasil.participacidadao.actions.ActionsCreator;
 import com.monitorabrasil.participacidadao.dispatcher.Dispatcher;
 import com.monitorabrasil.participacidadao.stores.ProjetoStore;
-import com.monitorabrasil.participacidadao.views.ProposicoesDetailActivity;
-import com.monitorabrasil.participacidadao.views.ProposicoesDetailFragment;
-import com.monitorabrasil.participacidadao.views.VereadorDetailActivity;
-import com.monitorabrasil.participacidadao.views.VereadorListActivity;
 import com.monitorabrasil.participacidadao.views.adapters.ProjetoAdapter;
+import com.monitorabrasil.participacidadao.views.interfaces.RecyclerViewOnClickListenerHack;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

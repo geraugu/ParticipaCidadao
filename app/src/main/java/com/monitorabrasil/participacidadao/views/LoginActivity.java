@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.monitorabrasil.participacidadao.R;
 import com.monitorabrasil.participacidadao.actions.ActionsCreator;
@@ -32,6 +33,7 @@ import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -108,6 +110,14 @@ public class LoginActivity extends AppCompatActivity  {
         //usuario atual
         currentUser = ParseUser.getCurrentUser();
 
+        //atualizar usuario
+        btnSalvar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgress(true);
+                atualizaCadastro();
+            }
+        });
 
 
         //evento: logar
@@ -374,6 +384,54 @@ public class LoginActivity extends AppCompatActivity  {
         }
 
         return valido;
+    }
+
+    private void atualizaCadastro() {
+        //ParseFile
+        final ParseFile mParseFile = new ParseFile("foto.png",buscaFoto());
+        mParseFile.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                // If successful add file to user and signUpInBackground
+                if (e == null) {
+                    if(mParseFile!= null)
+                        currentUser.put("foto", mParseFile);
+                    currentUser.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            currentUser.setEmail(mEmailView.getText().toString());
+                            currentUser.put("nome", mNome.getText().toString());
+                            currentUser.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    showProgress(false);
+                                    if (null == e) {
+                                        Toast.makeText(LoginActivity.this, getString(R.string.cadastro_atualizado), Toast.LENGTH_LONG).show();
+                                    } else {
+                                        try {
+                                            currentUser.fetch();
+                                            mEmailView.setText(currentUser.getEmail());
+                                        } catch (ParseException e1) {
+                                            e1.printStackTrace();
+                                        }
+                                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    Toast.makeText(LoginActivity.this,e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private byte[] buscaFoto(){
+        Bitmap bitmap = ((BitmapDrawable)btnFoto.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return  byteArray;
     }
 
 
