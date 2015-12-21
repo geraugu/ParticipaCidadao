@@ -235,6 +235,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void buscaGastos() {
+        valorTotal.clear();
+        xVals.clear();
+        yVals1.clear();
         Iterator<ParseObject> gastoIt = camaraStore.getGastos().iterator();
 
         while (gastoIt.hasNext()) {
@@ -269,7 +272,7 @@ public class MainActivity extends AppCompatActivity
 //        mChart.set
 
         mChart.setDrawBarShadow(false);
-        mChart.setDrawValueAboveBar(true);
+        mChart.setDrawValueAboveBar(false);
 
         mChart.setDescription("");
 
@@ -337,10 +340,10 @@ public class MainActivity extends AppCompatActivity
 
 
         //setdata
-
         setData(grafico);
 
         mChart.animateX(2500, Easing.EasingOption.EaseInOutQuart);
+        mChart.getData().setDrawValues(false);
         mChart.notifyDataSetChanged();
 
     }
@@ -349,7 +352,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        BarDataSet set1 = new BarDataSet(grafico.getyAxis(), "Gastos Totais");
+        BarDataSet set1 = new BarDataSet(grafico.getyAxis(), "Gastos Totais (R$)");
         set1.setBarSpacePercent(35f);
 
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
@@ -476,6 +479,7 @@ public class MainActivity extends AppCompatActivity
         actionsCreator.getPerguntaAleatoria();
 
         //busca gastos
+        camaraStore.limpaGastos();
         actionsCreator.getGastos();
     }
 

@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.monitorabrasil.participacidadao.R;
 import com.monitorabrasil.participacidadao.actions.ActionsCreator;
 import com.monitorabrasil.participacidadao.actions.DialogaActions;
@@ -137,12 +138,14 @@ public class DialogaVotoFragment extends Fragment {
     public static DialogaVotoFragment newInstance(ParseObject tema, String perguntaId) {
         DialogaVotoFragment fragment = new DialogaVotoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_NOME, tema.getString("Nome"));
-        args.putString(ARG_ICONE, tema.getString("imagem"));
-        args.putInt(ARG_COR,Tema.buscaCor(tema.getString("imagem")));
-        args.putString(ARG_IDTEMA,tema.getObjectId());
-        args.putString(ARG_IDPERGUNTA,perguntaId);
-        fragment.setArguments(args);
+        if(tema != null) {
+            args.putString(ARG_NOME, tema.getString("Nome"));
+            args.putString(ARG_ICONE, tema.getString("imagem"));
+            args.putInt(ARG_COR, Tema.buscaCor(tema.getString("imagem")));
+            args.putString(ARG_IDTEMA, tema.getObjectId());
+            args.putString(ARG_IDPERGUNTA, perguntaId);
+            fragment.setArguments(args);
+        }
         return fragment;
     }
 
@@ -539,8 +542,13 @@ public class DialogaVotoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        dispatcher.register(this);
-        dispatcher.register(dialogaStore);
+        try {
+            dispatcher.register(this);
+            dispatcher.register(dialogaStore);
+        }catch (Exception e){
+            Crashlytics.log(0,"error","Erro no registro do dialogaStore - DialogaVotoFragment");
+        }
+
     }
 
     @Override

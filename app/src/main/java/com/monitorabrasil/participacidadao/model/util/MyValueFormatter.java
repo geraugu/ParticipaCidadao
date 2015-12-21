@@ -10,15 +10,17 @@ import java.text.NumberFormat;
  */
 public class MyValueFormatter implements ValueFormatter {
 
-    private DecimalFormat mFormat;
+    private NumberFormat  mFormat;
 
     public MyValueFormatter() {
-        mFormat = new DecimalFormat("###,###,###,##0.0");
+        mFormat = NumberFormat.getInstance();
+        mFormat.setMaximumFractionDigits(2);
+
     }
 
     @Override
     public String getFormattedValue(float value) {
-        return "R$" + NumberFormat.getCurrencyInstance().format(value) ;
+        return  mFormat.format(value) ;
     }
 
 }

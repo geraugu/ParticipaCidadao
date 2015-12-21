@@ -33,9 +33,7 @@ public class CamaraStore extends Store{
         return instance;
     }
 
-    public List<ParseObject> getProjetos(){
-        return projetos;
-    }
+    public void limpaGastos(){gastos.clear();}
 
     public List<ParseObject> getGastos(){return gastos;}
 

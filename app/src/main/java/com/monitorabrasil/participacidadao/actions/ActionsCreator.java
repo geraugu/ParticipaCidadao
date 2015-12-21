@@ -2,6 +2,7 @@ package com.monitorabrasil.participacidadao.actions;
 
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.monitorabrasil.participacidadao.R;
@@ -435,36 +436,42 @@ public class ActionsCreator {
                 }
             });
         }else {
-            voto = new ParseObject("VotoDialoga");
-            voto.put("user", ParseUser.getCurrentUser());
-            voto.put("resposta", resposta);
-            voto.put("sim_nao", "n");
-            voto.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    //atualizar o contador da resposta
-                    resposta.increment("qtd_nao");
-                    resposta.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e == null) {
-                                dispatcher.dispatch(
-                                        DialogaActions.DIALOGA_CONCORDO,
-                                        DialogaActions.KEY_TEXT, "sucesso"
-                                );
+            if(resposta == null){
+                Crashlytics.log(0,"error","respota == null - Discordo Action");
+            }else{
+                voto = new ParseObject("VotoDialoga");
+                voto.put("user", ParseUser.getCurrentUser());
+                voto.put("resposta", resposta);
+                voto.put("sim_nao", "n");
+                voto.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        //atualizar o contador da resposta
+                        resposta.increment("qtd_nao");
+                        resposta.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    dispatcher.dispatch(
+                                            DialogaActions.DIALOGA_CONCORDO,
+                                            DialogaActions.KEY_TEXT, "sucesso"
+                                    );
 
-                            } else {
-                                dispatcher.dispatch(
-                                        DialogaActions.DIALOGA_CONCORDO,
-                                        DialogaActions.KEY_TEXT, "erro"
-                                );
+                                } else {
+                                    dispatcher.dispatch(
+                                            DialogaActions.DIALOGA_CONCORDO,
+                                            DialogaActions.KEY_TEXT, "erro"
+                                    );
+                                }
                             }
-                        }
-                    });
-                }
-            });
-        }
-        voto.pinInBackground();
+                        });
+                    }
+                });
+                voto.pinInBackground();
+            }
+
+            }
+
     }
 
     /**
@@ -739,10 +746,11 @@ public class ActionsCreator {
         query.getInBackground(idPolitico, new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject parseObject, ParseException e) {
-                dispatcher.dispatch(
-                        PoliticoActions.POLITICO_GET_INFOS,
-                        PoliticoActions.KEY_TEXT, parseObject
-                );
+                if(e == null)
+                    dispatcher.dispatch(
+                            PoliticoActions.POLITICO_GET_INFOS,
+                            PoliticoActions.KEY_TEXT, parseObject
+                    );
             }
         });
 

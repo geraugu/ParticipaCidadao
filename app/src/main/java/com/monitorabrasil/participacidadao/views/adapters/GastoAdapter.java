@@ -103,7 +103,7 @@ public class GastoAdapter extends RecyclerView.Adapter<GastoAdapter.ViewHolder> 
 //        mChart.set
 
         mChart.setDrawBarShadow(false);
-        mChart.setDrawValueAboveBar(true);
+        mChart.setDrawValueAboveBar(false);
 
         mChart.setDescription("");
 
@@ -175,7 +175,7 @@ public class GastoAdapter extends RecyclerView.Adapter<GastoAdapter.ViewHolder> 
 
 
 
-        BarDataSet set1 = new BarDataSet(grafico.getyAxis(), "Gastos Totais");
+        BarDataSet set1 = new BarDataSet(grafico.getyAxis(), "Gastos Totais(R$)");
         set1.setBarSpacePercent(35f);
 
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
@@ -184,6 +184,7 @@ public class GastoAdapter extends RecyclerView.Adapter<GastoAdapter.ViewHolder> 
             set1.setColor(MyApp.getInstance().getResources().getColor(grafico.getCor()));
 
             BarData data = new BarData(grafico.getxVals(), dataSets);
+            data.setDrawValues(false);
             // data.setValueFormatter(new MyValueFormatter());
             data.setValueTextSize(10f);
 //        data.setValueTypeface(mTf);
